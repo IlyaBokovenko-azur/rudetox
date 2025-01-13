@@ -1,8 +1,8 @@
 stages:
     download_data:
-        cmd: bash scripts/download_datasets.sh
+        cmd: python -m scripts.download_datasets
         deps:
-            - scripts/download_datasets.sh
+            - scripts/download_datasets.py
         outs:
             - data/detox_train.tsv
             - data/detox_dev.tsv

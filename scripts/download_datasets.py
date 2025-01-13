@@ -2,10 +2,13 @@ import os
 import requests
 import tarfile
 import zipfile
+import shutil
 
 def download_file(url, output_path):
-    """Download a file from a given URL to a specified path."""
-    response = requests.get(url, stream=True)
+    if "dropbox.com" in url and not url.endswith("?dl=1"):
+        url = f"{url}?dl=1"  # Force Dropbox direct download
+    response = requests.get(url, stream=True, allow_redirects=True)
+    # print(f"Redirect history: {[resp.url for resp in response.history]}")
     response.raise_for_status()
     with open(output_path, 'wb') as f:
         for chunk in response.iter_content(chunk_size=8192):
@@ -79,7 +82,7 @@ def main():
     extract_zip(persona_zip_path, data_dir)
     os.rename(os.path.join(data_dir, "TlkPersonaChatRus", "dialogues.tsv"), persona_path)
     os.remove(persona_zip_path)
-    os.rmdir(os.path.join(data_dir, "TlkPersonaChatRus"))
+    shutil.rmtree(os.path.join(data_dir, "TlkPersonaChatRus"))
 
     # Koziev dialogues
     koziev_zip_path = os.path.join(data_dir, "dialogues.zip")

@@ -125,7 +125,7 @@ def train(
         per_device_eval_batch_size=batch_size,
         logging_steps=logging_steps,
         eval_steps=eval_steps,
-        evaluation_strategy="steps",
+        eval_strategy="steps",
         save_steps=save_steps,
         learning_rate=learning_rate,
         warmup_steps=warmup_steps,

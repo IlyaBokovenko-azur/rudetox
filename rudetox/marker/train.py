@@ -8,7 +8,7 @@ from torch.utils.data import Dataset
 from transformers import AutoTokenizer, AutoModelForTokenClassification
 from transformers import Trainer, TrainingArguments, pipeline, AdamW, get_cosine_schedule_with_warmup
 from tqdm import tqdm
-from sklearn.metrics import classification_report
+# from sklearn.metrics import classification_report
 
 from rudetox.util.io import read_jsonl
 from rudetox.util.dl import gen_batch
@@ -103,7 +103,7 @@ def main(
     lr_scheduler_type = config.get("lr_scheduler_type", "linear")
     training_args = TrainingArguments(
         output_dir=out_dir,
-        evaluation_strategy="steps",
+        eval_strategy="steps",
         save_strategy="steps",
         per_device_train_batch_size=batch_size,
         per_device_eval_batch_size=batch_size,

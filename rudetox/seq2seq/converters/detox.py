@@ -13,7 +13,7 @@ def main(
     include_reverse
 ):
     records = []
-    with open(input_file, "r") as r:
+    with open(input_file, "r", encoding='utf-8') as r:
         header = next(r).strip().split("\t")
         reader = csv.reader(r, delimiter="\t", quotechar='"')
         for row in reader:
@@ -55,7 +55,7 @@ def main(
                 }
                 records.append(r)
 
-    with open(output_file, "w") as w:
+    with open(output_file, "w", encoding='utf-8') as w:
         for r in records:
             w.write(json.dumps(r, ensure_ascii=False).strip() + "\n")
 

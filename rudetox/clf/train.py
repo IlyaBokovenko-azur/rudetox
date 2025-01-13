@@ -100,7 +100,7 @@ def train(
         output_dir = temp_output_dir.name
     training_args = TrainingArguments(
         output_dir=output_dir,
-        evaluation_strategy="steps",
+        eval_strategy="steps",
         save_strategy="steps",
         per_device_train_batch_size=batch_size,
         per_device_eval_batch_size=batch_size,
